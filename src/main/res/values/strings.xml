@@ -1,0 +1,49 @@
+<resources>
+    <string name="app_name">iban4android</string>
+
+
+    <!-- invalid check digit -->
+    <string name="error_msg_invalid_check_digit">[%1$s] has invalid check digit: %2$s, expected check digit is: %3$s</string>
+
+    <!-- unsupport country code -->
+    <string name="error_msg_iban_country_code_required">countryCode is required; it cannot be null</string>
+    <string name="error_msg_iban_country_code_upper_case">Iban country code must contain upper case letters</string>
+    <string name="error_msg_iban_country_code_not_supported">Country code: %1$s is not supported.</string>
+    <string name="error_msg_non_existing_country_code">Iban contains non existing country code.</string>
+
+
+    <!-- iban -->
+
+    <string name="error_msg_invalid_length">[%1$s] length is %2$s expected length is: %3$s</string>
+    <string name="error_msg_iban_min_lenght">Iban length can\'t be less than %1$s</string>
+
+    <string name="error_msg_invalid_character">Invalid Character[%1$s] = \'%2$s\'</string>
+    <string name="error_msg_null_iban">Null can\'t be a valid Iban.</string>
+
+    <string name="assert_msg_upper_letters">%1$s must contain only upper case letters.</string>
+    <string name="assert_msg_digits_and_letters">%1$s must contain only digits or letters.</string>
+    <string name="assert_msg_digits">%1$s must contain only digits.</string>
+
+    <string name="error_msg_maximum_lenght">maximale Länge überschritten</string>
+    <string name="error_msg_iban_bank_code_required">bankCode is required; it cannot be null</string>
+    <string name="error_msg_iban_account_number_required">accountNumber is required; it cannot be null</string>
+    <string name="error_msg_iban_checksum_only_numeric">Position 3 and 4 must be digits.</string>
+    <string name="error_msg_bban_pos_uppercase_only">Only upper case at position %1$s</string>
+    <string name="error_msg_bban_pos_numeric_only">Only digits at position %1$s</string>
+    <string name="error_msg_bban_pos_alphanumeric_only">Only letters and digits at position %1$s</string>
+
+    <!-- bic -->
+
+    <string name="iban4j_error_msg_bic_country_only_upper_case">Bic country code must contain upper case letters</string>
+    <string name="iban4j_error_msg_bic_non_existing_country">Bic contains non existing country code: %1$s</string>
+    <string name="iban4j_error_msg_bic_null">Null can\'t be a valid Bic.</string>
+    <string name="iban4j_error_msg_bic_length">Bic length must be %1$s or %2$s</string>
+    <string name="iban4j_error_msg_bic_upper_case">Bic must contain only upper case letters.</string>
+
+    <string name="iban4j_error_msg_bic_bank_code_only_letters">Bank code must contain only letters.</string>
+    <string name="iban4j_error_msg_bic_location_code_only_letters_or_digits">Location code must contain only letters or digits.</string>
+    <string name="iban4j_error_msg_bic_branch_code_only_letters_or_digits">Branch code must contain only letters or digits</string>
+
+
+
+</resources>

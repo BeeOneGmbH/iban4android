@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="error_msg_iban_checksum_only_numeric">Stelle 3 und 4 dürfen nur numerische Werte enthalten</string>
+    <string name="error_msg_bban_pos_uppercase_only">Nur Großbuchstaben erlauben (A-Z) an Position %1$s</string>
+    <string name="error_msg_bban_pos_numeric_only">Nur Zahlen erlaubt (0-9) an Position %1$s</string>
+    <string name="error_msg_bban_pos_alphanumeric_only">Nur Buchstaben und Zahlen (A-Z, a-z und 0-9) erlaubt an Position %1$s</string>
+
+</resources>
