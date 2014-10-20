@@ -19,7 +19,6 @@ import android.content.Context;
 
 import org.iban4j.UnsupportedCountryException;
 
-import static org.iban4j.UnsupportedCountryException.Constraint.*;
 import com.github.mikegr.iban4android.R;
 
 public class UnsupportedCountryExceptionFormatter extends AndroidExceptionFormatter {
@@ -30,14 +29,8 @@ public class UnsupportedCountryExceptionFormatter extends AndroidExceptionFormat
     }
 
     public String getMessage(UnsupportedCountryException ex) {
-        Object[] values = ex.getValues();
-        switch(ex.getConstraint()) {
-            case upper_case: return ctx.getString(R.string.error_msg_iban_country_code_upper_case);
-            case non_existing: return ctx.getString(R.string.error_msg_non_existing_country_code);
-            case not_supported: return ctx.getString(R.string.error_msg_iban_country_code_not_supported, values);
-            case is_null: return ctx.getString(R.string.error_msg_iban_country_code_required);
-        }
-        return ex.getMessage();
+        String cc = ex.getCountryCode();
+        return ctx.getString(R.string.error_msg_iban_country_code_not_supported, cc);
     }
 
 }

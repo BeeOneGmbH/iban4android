@@ -22,8 +22,16 @@ import org.iban4j.IbanFormatException;
 import com.github.mikegr.iban4android.R;
 
 import static org.iban4j.IbanFormatException.*;
-import static org.iban4j.IbanFormatException.Constraint.*;
-import static org.iban4j.IbanFormatException.Constraint.invalid_length;
+import static org.iban4j.IbanFormatException.IbanFormatViolation.BBAN_LENGTH;
+import static org.iban4j.IbanFormatException.IbanFormatViolation.BBAN_ONLY_DIGITS;
+import static org.iban4j.IbanFormatException.IbanFormatViolation.BBAN_ONLY_DIGITS_OR_LETTERS;
+import static org.iban4j.IbanFormatException.IbanFormatViolation.BBAN_ONLY_UPPER_CASE_LETTERS;
+import static org.iban4j.IbanFormatException.IbanFormatViolation.CHECK_DIGIT_ONLY_DIGITS;
+import static org.iban4j.IbanFormatException.IbanFormatViolation.CHECK_DIGIT_TWO_DIGITS;
+import static org.iban4j.IbanFormatException.IbanFormatViolation.COUNTRY_CODE_EXISTS;
+import static org.iban4j.IbanFormatException.IbanFormatViolation.COUNTRY_CODE_TWO_LETTERS;
+import static org.iban4j.IbanFormatException.IbanFormatViolation.COUNTRY_CODE_UPPER_CASE_LETTERS;
+import static org.iban4j.IbanFormatException.IbanFormatViolation.IBAN_NOT_NULL;
 
 public class IbanFormatExceptionFormatter extends AndroidExceptionFormatter {
 
@@ -34,21 +42,18 @@ public class IbanFormatExceptionFormatter extends AndroidExceptionFormatter {
 
     @SuppressLint("StringFormatMatches")
     public String getMessage(IbanFormatException ex) {
-        Object[] values = ex.getValues();
-        switch(ex.getConstraint()) {
+        switch(ex.getFormatViolation()) {
+            case BBAN_LENGTH: return ctx.getString(R.string.error_msg_invalid_length, ex.getActual(), ex.getExpected());
+            case IBAN_NOT_NULL: return ctx.getString(R.string.error_msg_null_iban);
+            case CHECK_DIGIT_ONLY_DIGITS: return ctx.getString(R.string.error_msg_iban_checksum_only_numeric);
+            case CHECK_DIGIT_TWO_DIGITS: return ctx.getString(R.string.error_msg_iban_checksum_only_numeric);
+            case BBAN_ONLY_UPPER_CASE_LETTERS: return ctx.getString(R.string.error_msg_bban_pos_uppercase_only, ""); //TODO missing value
+            case BBAN_ONLY_DIGITS: return ctx.getString(R.string.error_msg_bban_pos_numeric_only, ""); //TODO missing value
+            case BBAN_ONLY_DIGITS_OR_LETTERS: return ctx.getString(R.string.error_msg_bban_pos_alphanumeric_only, "");  //TODO missing value
 
-            case invalid_length: return ctx.getString(R.string.error_msg_invalid_length, values);
-            case invalid_character: return ctx.getString(R.string.error_msg_invalid_character, values);
-            case is_null: return ctx.getString(R.string.error_msg_null_iban);
-            case assert_msg_digits: return ctx.getString(R.string.assert_msg_digits, values);
-            case assert_msg_digits_and_letters: return ctx.getString(R.string.assert_msg_digits_and_letters, values);
-            case assert_msg_upper_letters: return ctx.getString(R.string.assert_msg_upper_letters, values);
-            case bank_code_required: return ctx.getString(R.string.error_msg_iban_bank_code_required);
-            case account_number_required: return ctx.getString(R.string.error_msg_iban_account_number_required);
-            case checksum_only_numeric: return ctx.getString(R.string.error_msg_iban_checksum_only_numeric);
-            case pos_uppercase_only: return ctx.getString(R.string.error_msg_bban_pos_uppercase_only, values);
-            case pos_numeric_only: return ctx.getString(R.string.error_msg_bban_pos_numeric_only, values);
-            case pos_alphanumeric_only: return ctx.getString(R.string.error_msg_bban_pos_alphanumeric_only, values);
+            case COUNTRY_CODE_TWO_LETTERS:return ctx.getString(R.string.error_msg_iban_country_code_upper_case);
+            case COUNTRY_CODE_UPPER_CASE_LETTERS: return ctx.getString(R.string.error_msg_iban_country_code_upper_case);
+            case COUNTRY_CODE_EXISTS: return ctx.getString(R.string.error_msg_non_existing_country_code);
         }
         return ex.getMessage();
     }
