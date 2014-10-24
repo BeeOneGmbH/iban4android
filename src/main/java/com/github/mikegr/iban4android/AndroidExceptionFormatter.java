@@ -18,6 +18,7 @@ package com.github.mikegr.iban4android;
 import android.content.Context;
 
 import org.iban4j.BicFormatException;
+import org.iban4j.Iban4jException;
 import org.iban4j.IbanFormatException;
 import org.iban4j.InvalidCheckDigitException;
 import org.iban4j.UnsupportedCountryException;
@@ -32,4 +33,19 @@ public class AndroidExceptionFormatter {
     }
 
 
+    public static CharSequence getMessage(Context ctx, Iban4jException ex) {
+        if (ex instanceof  IbanFormatException) {
+            return new IbanFormatExceptionFormatter(ctx).getMessage((IbanFormatException) ex);
+        }
+        if (ex instanceof  BicFormatException) {
+            return new BicFormatExceptionFormatter(ctx).getErrorMessage((BicFormatException) ex);
+        }
+        if (ex instanceof  InvalidCheckDigitException) {
+            return new InvalidCheckDigitExceptionFormatter(ctx).getMessage((InvalidCheckDigitException) ex);
+        }
+        if (ex instanceof  UnsupportedCountryException) {
+            return new UnsupportedCountryExceptionFormatter(ctx).getMessage((UnsupportedCountryException) ex);
+        }
+        return ex.getMessage();
+    }
 }
