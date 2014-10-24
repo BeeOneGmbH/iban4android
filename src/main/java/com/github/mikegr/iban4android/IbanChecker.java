@@ -22,15 +22,10 @@ import org.iban4j.UnsupportedCountryException;
 import org.iban4j.bban.BbanStructure;
 import org.iban4j.bban.BbanStructureEntry;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import static org.iban4j.IbanFormatException.Constraint.checksum_only_numeric;
-import static org.iban4j.IbanFormatException.Constraint.invalid_length;
-import static org.iban4j.IbanFormatException.Constraint.pos_alphanumeric_only;
-import static org.iban4j.IbanFormatException.Constraint.pos_numeric_only;
-import static org.iban4j.IbanFormatException.Constraint.pos_uppercase_only;
 import static org.iban4j.IbanFormatException.IbanFormatViolation.BBAN_LENGTH;
-import static org.iban4j.UnsupportedCountryException.Constraint.upper_case;
 
 /** IbanChecker accepts incomplete IBANs
  *
@@ -98,9 +93,9 @@ public class IbanChecker {
      * @return
      */
     private static void checkValidCountryCode(String iban) {
-        IbanUtil.validateCountryCode(iban);
         String cc = IbanUtil.getCountryCode(iban);
         CountryCode countryCode = CountryCode.getByCode(cc);
+        IbanUtil.isSupportedCountry(countryCode);
         BbanStructure structure = BbanStructure.forCountry(countryCode);
     }
 
@@ -108,21 +103,32 @@ public class IbanChecker {
         CountryCode cc = CountryCode.getByCode(IbanUtil.getCountryCode(incompleteIban));
         BbanStructure bbanStructure = BbanStructure.forCountry(cc);
         String bban = IbanUtil.getBban(incompleteIban);
-        List<BbanStructureEntry.EntryCharacterType> list = bbanStructure.generateCharacterTypeList();
+        List<BbanStructureEntry.EntryCharacterType> list = generateCharacterTypeList(bbanStructure);
 
-        if (bban.length() > list.size()) throw new IbanFormatException(invalid_length, incompleteIban, incompleteIban.length(), list.size() + 4);
+        if (bban.length() > list.size()) throw new IbanFormatException(IbanFormatException.IbanFormatViolation.BBAN_LENGTH, incompleteIban.length(), list.size() + 4, incompleteIban);
 
         for(int i = 0; i < bban.length(); i++) {
             BbanStructureEntry.EntryCharacterType type = list.get(i);
             if (! validateEntryCharacterType(type, bban.charAt(i))) {
                 switch(type) {
-                    case a: throw new IbanFormatException(pos_uppercase_only, ""+ (BBAN_INDEX +i));
-                    case c: throw new IbanFormatException(pos_alphanumeric_only, "" + (BBAN_INDEX +i));
-                    case n: throw new IbanFormatException(pos_numeric_only, "" + (BBAN_INDEX +i));
+                    case a: throw new IbanFormatException(IbanFormatException.IbanFormatViolation.BBAN_ONLY_UPPER_CASE_LETTERS, ""+ (BBAN_INDEX +i));
+                    case c: throw new IbanFormatException(IbanFormatException.IbanFormatViolation.BBAN_ONLY_DIGITS_OR_LETTERS, "" + (BBAN_INDEX +i));
+                    case n: throw new IbanFormatException(IbanFormatException.IbanFormatViolation.BBAN_ONLY_DIGITS, "" + (BBAN_INDEX +i));
                 }
             }
         }
     }
+
+    public static List<BbanStructureEntry.EntryCharacterType> generateCharacterTypeList(BbanStructure structure) {
+        ArrayList<BbanStructureEntry.EntryCharacterType> list = new ArrayList<BbanStructureEntry.EntryCharacterType>();
+        for(BbanStructureEntry entry:structure.getEntries()) {
+            for(int i = 0; i < entry.getLength(); i++) {
+                list.add(entry.getCharacterType());
+            }
+        }
+        return list;
+    }
+
 
 
     private static boolean validateEntryCharacterType(final BbanStructureEntry.EntryCharacterType type, char ch) {
