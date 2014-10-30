@@ -143,7 +143,9 @@ public class IbanChecker {
 
     public static int getIbanLength(String iban) {
         CountryCode cc = CountryCode.getByCode(IbanUtil.getCountryCode(iban));
-        if (cc == null) return 2;
+        if (! IbanUtil.isSupportedCountry(cc)) {
+            return 2;
+        }
         return IbanUtil.getIbanLength(cc);
     }
 
