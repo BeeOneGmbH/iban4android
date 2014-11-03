@@ -22,7 +22,6 @@ import org.iban4j.BicFormatException;
 import com.github.mikegr.iban4android.R;
 
 import static org.iban4j.BicFormatException.*;
-import static org.iban4j.BicFormatException.Constraint.*;
 
 public class BicFormatExceptionFormatter extends AndroidExceptionFormatter {
 
@@ -33,6 +32,7 @@ public class BicFormatExceptionFormatter extends AndroidExceptionFormatter {
 
     @SuppressLint("StringFormatMatches")
     public String getErrorMessage(BicFormatException ex) {
+        /*
         Object[] values = ex.getValues();
         switch(ex.getConstraint()) {
             case length: return ctx.getString(R.string.iban4j_error_msg_bic_length, values);
@@ -45,6 +45,7 @@ public class BicFormatExceptionFormatter extends AndroidExceptionFormatter {
             case is_null: ctx.getString(R.string.iban4j_error_msg_bic_null);
             case bic_upper_case: return ctx.getString(R.string.iban4j_error_msg_bic_upper_case);
         }
+        */
         return ex.getMessage();
     }
 

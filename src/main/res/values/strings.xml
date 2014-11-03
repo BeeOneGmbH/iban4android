@@ -3,18 +3,18 @@
 
 
     <!-- invalid check digit -->
-    <string name="error_msg_invalid_check_digit">[%1$s] has invalid check digit: %2$s, expected check digit is: %3$s</string>
+    <string name="error_msg_invalid_check_digit">Invalid check digit: %1$s, expected check digit is: %2$s</string>
 
     <!-- unsupport country code -->
     <string name="error_msg_iban_country_code_required">countryCode is required; it cannot be null</string>
-    <string name="error_msg_iban_country_code_upper_case">Iban country code must contain upper case letters</string>
+    <string name="error_msg_iban_country_code_upper_case">Iban country code must contain two upper case letters</string>
     <string name="error_msg_iban_country_code_not_supported">Country code: %1$s is not supported.</string>
     <string name="error_msg_non_existing_country_code">Iban contains non existing country code.</string>
 
 
     <!-- iban -->
 
-    <string name="error_msg_invalid_length">[%1$s] length is %2$s expected length is: %3$s</string>
+    <string name="error_msg_invalid_length">Length is %1$s expected length is: %2$s</string>
     <string name="error_msg_iban_min_lenght">Iban length can\'t be less than %1$s</string>
 
     <string name="error_msg_invalid_character">Invalid Character[%1$s] = \'%2$s\'</string>

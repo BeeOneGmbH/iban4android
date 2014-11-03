@@ -33,20 +33,19 @@ public class AndroidExceptionFormatter {
     }
 
 
-    public static String getMessage(Context ctx, Iban4jException ex) {
-        if (ex instanceof IbanFormatException) {
+    public static CharSequence getMessage(Context ctx, Iban4jException ex) {
+        if (ex instanceof  IbanFormatException) {
             return new IbanFormatExceptionFormatter(ctx).getMessage((IbanFormatException) ex);
         }
-        if (ex instanceof UnsupportedCountryException) {
-            return new UnsupportedCountryExceptionFormatter(ctx).getMessage((UnsupportedCountryException) ex);
-        }
-        if (ex instanceof InvalidCheckDigitException) {
-            return new InvalidCheckDigitExceptionFormatter(ctx).getMessage((InvalidCheckDigitException) ex);
-        }
-        if (ex instanceof BicFormatException) {
+        if (ex instanceof  BicFormatException) {
             return new BicFormatExceptionFormatter(ctx).getErrorMessage((BicFormatException) ex);
         }
-        return "Unknown exception";
+        if (ex instanceof  InvalidCheckDigitException) {
+            return new InvalidCheckDigitExceptionFormatter(ctx).getMessage((InvalidCheckDigitException) ex);
+        }
+        if (ex instanceof  UnsupportedCountryException) {
+            return new UnsupportedCountryExceptionFormatter(ctx).getMessage((UnsupportedCountryException) ex);
+        }
+        return ex.getMessage();
     }
-
 }

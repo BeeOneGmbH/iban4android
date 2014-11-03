@@ -29,7 +29,7 @@ public class InvalidCheckDigitExceptionFormatter  extends  AndroidExceptionForma
     }
 
     public String getMessage(InvalidCheckDigitException ex) {
-        return ctx.getString(R.string.error_msg_invalid_check_digit, ex.getIban(), ex.getInvalid(), ex.getExpected());
+        return ctx.getString(R.string.error_msg_invalid_check_digit, ex.getActual(), ex.getExpected());
     }
 
 }
