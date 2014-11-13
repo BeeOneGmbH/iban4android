@@ -95,8 +95,10 @@ public class IbanChecker {
     private static void checkValidCountryCode(String iban) {
         String cc = IbanUtil.getCountryCode(iban);
         CountryCode countryCode = CountryCode.getByCode(cc);
-        IbanUtil.isSupportedCountry(countryCode);
-        BbanStructure structure = BbanStructure.forCountry(countryCode);
+        if (IbanUtil.isSupportedCountry(countryCode)) {
+            throw new UnsupportedCountryException(cc, "Country code: " + cc + " is not supported.");
+        };
+
     }
 
     private static void validateIncompleteBban(final String incompleteIban)  {
