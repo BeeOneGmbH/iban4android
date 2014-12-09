@@ -116,7 +116,7 @@ public class IbanChecker {
      * @param iban
      * @return
      */
-    private void checkValidCountryCode(String iban) {
+    public void checkValidCountryCode(String iban) {
         String cc = IbanUtil.getCountryCode(iban);
         if (validCountries != null && ! validCountries.contains(cc)) {
             throw new UnsupportedCountryException(cc, "Country code: " + cc + " is not supported.");
