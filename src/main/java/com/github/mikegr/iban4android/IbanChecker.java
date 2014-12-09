@@ -15,6 +15,8 @@
  */
 package com.github.mikegr.iban4android;
 
+import android.content.Context;
+
 import org.iban4j.CountryCode;
 import org.iban4j.IbanFormatException;
 import org.iban4j.IbanUtil;
@@ -23,6 +25,7 @@ import org.iban4j.bban.BbanStructure;
 import org.iban4j.bban.BbanStructureEntry;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.iban4j.IbanFormatException.IbanFormatViolation.BBAN_LENGTH;
@@ -39,13 +42,34 @@ public class IbanChecker {
     private static final int CHECK_DIGIT_LENGTH = 2;
     private static final int BBAN_INDEX = CHECK_DIGIT_INDEX + CHECK_DIGIT_LENGTH;
 
+    private List<String> validCountries;
+
+    public IbanChecker() {
+    }
+
+    /**
+     * Only countries in validCountries are allowed
+     * @param validCountries
+     */
+    public IbanChecker(List<String> validCountries) {
+        this.validCountries = validCountries;
+    }
+
+    /**
+     * Only countries in validCountries are allowed
+     * @param ctx
+     * @param valid_countries resource id of string array
+     */
+    public IbanChecker(Context ctx, int valid_countries) {
+        this.validCountries = Arrays.asList(ctx.getResources().getStringArray(valid_countries));
+    }
 
     /**
      * Throws Exception on error case.
      * @param iban
      * @return true if exact required size, false otherwise
      */
-    public static boolean check(String iban) {
+    public boolean check(String iban) {
         if (iban.length() >= 1) {
             if (!Character.isLetter(iban.charAt(0))) {
                 throw new IbanFormatException(IbanFormatException.IbanFormatViolation.COUNTRY_CODE_UPPER_CASE_LETTERS, "Iban country code must contain upper case letters.");
@@ -92,8 +116,11 @@ public class IbanChecker {
      * @param iban
      * @return
      */
-    private static void checkValidCountryCode(String iban) {
+    private void checkValidCountryCode(String iban) {
         String cc = IbanUtil.getCountryCode(iban);
+        if (validCountries != null && ! validCountries.contains(cc)) {
+            throw new UnsupportedCountryException(cc, "Country code: " + cc + " is not supported.");
+        }
         CountryCode countryCode = CountryCode.getByCode(cc);
         if (! IbanUtil.isSupportedCountry(countryCode)) {
             throw new UnsupportedCountryException(cc, "Country code: " + cc + " is not supported.");
