@@ -40,6 +40,7 @@
     <string name="iban4j_error_msg_bic_upper_case">Der BIC darf nur aus Großbuchstaben bestehen</string>
 
     <string name="iban4j_error_msg_bic_bank_code_only_letters">Der BIC darf nur aus Buchstaben bestehen</string>
-
+    <string name="iban4j_error_msg_bic_location_code_only_letters_or_digits">Location code must only contain letters or digits</string>
+    <string name="iban4j_error_msg_bic_branch_code_only_letters_or_digits">Branch code must only contain letters or digits</string>
 
 </resources>
