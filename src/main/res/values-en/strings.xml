@@ -23,8 +23,8 @@
 
     <string name="error_msg_iban_checksum_only_numeric">Position 3 and 4 must be digits</string>
     <string name="error_msg_bban_pos_uppercase_only">Only upper case at position %1$s</string>
-    <string name="error_msg_bban_pos_numeric_only">Only digits at position %1$s</string>
-    <string name="error_msg_bban_pos_alphanumeric_only">Only letters and digits at position %1$s</string>
+    <string name="error_msg_bban_pos_numeric_only">Only digits at this position %1$s</string>
+    <string name="error_msg_bban_pos_alphanumeric_only">Only letters and digits at this position %1$s</string>
 
     <string name="error_msg_maximum_lenght">Maximum Length Exceeded</string>
     <string name="error_msg_iban_bank_code_required">Bank code is required; it cannot be zero</string>

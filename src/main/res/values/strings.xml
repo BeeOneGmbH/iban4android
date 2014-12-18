@@ -28,8 +28,8 @@
     <string name="error_msg_iban_account_number_required">Kontonummer wird benötigt; sie darf nicht null sein</string>
     <string name="error_msg_iban_checksum_only_numeric">Die dritte und vierte Stelle muss mit einer Ziffer belegt sein</string>
     <string name="error_msg_bban_pos_uppercase_only">Nur Großbuchstaben an Stelle %1$s</string>
-    <string name="error_msg_bban_pos_numeric_only">Nur Ziffern an Stelle %1$s.</string>
-    <string name="error_msg_bban_pos_alphanumeric_only">Nur Buchstaben oder Ziffern an Stelle %1$s</string>
+    <string name="error_msg_bban_pos_numeric_only">Nur Ziffern an dieser Stelle %1$s.</string>
+    <string name="error_msg_bban_pos_alphanumeric_only">Nur Buchstaben oder Ziffern an dieser Stelle %1$s</string>
 
     <!-- bic -->
 
