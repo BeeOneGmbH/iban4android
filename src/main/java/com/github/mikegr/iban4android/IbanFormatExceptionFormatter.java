@@ -43,7 +43,7 @@ public class IbanFormatExceptionFormatter extends AndroidExceptionFormatter {
     @SuppressLint("StringFormatMatches")
     public String getMessage(IbanFormatException ex) {
         switch(ex.getFormatViolation()) {
-            case BBAN_LENGTH: return ctx.getString(R.string.error_msg_invalid_length, ex.getActual(), ex.getExpected());
+            case BBAN_LENGTH: return ctx.getString(R.string.error_msg_invalid_length, (Integer) ex.getActual()+4, (Integer)ex.getExpected()+4);
             case IBAN_NOT_NULL: return ctx.getString(R.string.error_msg_null_iban);
             case CHECK_DIGIT_ONLY_DIGITS: return ctx.getString(R.string.error_msg_iban_checksum_only_numeric);
             case CHECK_DIGIT_TWO_DIGITS: return ctx.getString(R.string.error_msg_iban_checksum_only_numeric);
